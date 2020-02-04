@@ -1,0 +1,24 @@
+FROM debian:buster
+
+ENV USERNAME debian
+ENV USERHOME /home/debian
+
+RUN apt-get update; apt-get install -y sudo python3 python3-pip curl git
+RUN echo "${USERNAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
+    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+ENV LANG en_US.utf8
+
+RUN useradd -rm -d ${USERHOME} -s /bin/bash -g root -G sudo -u 1000 ${USERNAME}
+
+USER ${USERNAME}
+WORKDIR ${USERHOME}
+
+RUN mkdir ${USERHOME}/bin; mkdir -p ${USERHOME}/.local/bin
+RUN pip3 install --user awscli ansible boto boto3;
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+RUN curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.14.6/2019-08-22/bin/linux/amd64/aws-iam-authenticator
+RUN chmod +x kubectl; mv kubectl $HOME/bin; chmod +x aws-iam-authenticator; mv aws-iam-authenticator $HOME/bin;
+
+ENV PATH="${USERHOME}/bin:${USERHOME}/.local/bin:${PATH}"
