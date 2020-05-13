@@ -21,6 +21,6 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s 
 RUN curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.14.6/2019-08-22/bin/linux/amd64/aws-iam-authenticator
 RUN chmod +x kubectl; mv kubectl $HOME/bin; chmod +x aws-iam-authenticator; mv aws-iam-authenticator $HOME/bin;
 
-RUN curl -o helm3.tar.gz https://get.helm.sh/helm-v3.2.1-linux-amd64.tar.gz; tar xzvf helm3.tar.gz; mv linux-amd64/helm $HOME/bin;
+RUN curl -o helm3.tar.gz https://get.helm.sh/helm-v3.2.1-linux-amd64.tar.gz; tar xzvf helm3.tar.gz; mv linux-amd64/helm $HOME/bin; rm -rf linux-amd64;
 
 ENV PATH="${USERHOME}/bin:${USERHOME}/.local/bin:${PATH}"
