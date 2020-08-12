@@ -23,5 +23,6 @@ RUN chmod +x kubectl; mv kubectl $HOME/bin; chmod +x aws-iam-authenticator; mv a
 
 RUN curl -o helm3.tar.gz https://get.helm.sh/helm-v3.2.1-linux-amd64.tar.gz; tar xzvf helm3.tar.gz; mv linux-amd64/helm $HOME/bin; rm -rf linux-amd64; rm -f helm3.tar.gz;
 # RUN curl -L https://aka.ms/InstallAzureCli | bash
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 ENV PATH="${USERHOME}/bin:${USERHOME}/.local/bin:${PATH}"
