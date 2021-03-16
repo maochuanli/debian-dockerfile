@@ -24,7 +24,7 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
     rm -f awscliv2.zip && \
     aws --version
 
-RUN pip3 install --user awscli ansible boto boto3 prometheus-client requests jmespath pandas kubernetes flask;
+RUN pip3 install --user  ansible boto boto3 prometheus-client requests jmespath pandas kubernetes flask;
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 
 RUN curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.17.7/2020-07-08/bin/linux/amd64/aws-iam-authenticator
