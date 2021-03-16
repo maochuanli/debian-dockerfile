@@ -3,7 +3,7 @@ FROM debian:buster
 ENV USERNAME debian
 ENV USERHOME /home/debian
 
-RUN apt-get update; apt-get install -y sudo python3 python3-pip curl git wget
+RUN apt-get update; apt-get install -y sudo python3 python3-pip curl git wget unzip
 RUN echo "${USERNAME} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
